@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <title>login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+                <p class="text-center" style="font-size: 20px;"><strong>班级管理系统</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <form class="form-horizontal" action="{% url 'logins:login' %}" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="username" class="col-md-offset-2 col-md-2 control-label">用户名：</label>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control" name="username" placeholder="username">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="password" class="col-md-offset-2 col-md-2 control-label">密  码：</label>
+                    <div class="col-md-4">
+                      <input type="password" class="form-control" name="password" placeholder="password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-offset-4 col-md-4 text-center">
+                      <button type="submit" class="btn btn-default">确定</button>
+                      <button type="reset"  class="btn btn-default" style="margin-left: 60px;">取消</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+	<script src="{% static 'js/bootstrap.js'%}"></script>
+</body>
+</html>

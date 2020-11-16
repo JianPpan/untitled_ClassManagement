@@ -33,3 +33,14 @@ function edit_studentManagment(the){
     })
 }
 //*********更新学生管理遮罩层************
+//*********删除功能************
+function delete_confirm(){
+    var a=confirm("删除学生信息","确认删除？");
+    if(a==true)
+    {
+        alert("已经删除！");
+    }
+    else
+        return false;
+}
+//*********删除功能************

@@ -98,3 +98,38 @@ def studentUpdated(request):
             return render(request, 'studentManagement.html', {"username": username})
     else:
         return render(request, 'studentManagement.html', {"username": username})
+
+
+def studentDelete(request, sno):
+    username = request.session['username']
+    cursor = conn_db()
+    sql1 = "delete from student where sno = '%s'" % (sno)
+    cursor.execute(sql1)
+    conn.commit()
+
+    sql2 = "select * from student"
+    cursor.execute(sql2)
+    row_list = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return render(request, 'studentManagement.html', {"username": username, 'row_list': row_list})
+
+
+def studentSearch(request):
+    if request.method == 'POST':
+        username = request.session['username']
+        sname = request.POST['sname']
+        cursor = conn_db()
+        if sname != '':
+            sql1 = "select * from student where sname = '%s'" % (sname)
+            cursor.execute(sql1)
+            conn.commit()
+            row_list = cursor.fetchall()
+            return render(request, 'studentManagement.html', {"username": username, 'row_list': row_list})
+        else:
+            sql2 = "select * from student"
+            cursor.execute(sql2)
+            conn.commit()
+            row_list = cursor.fetchall()
+            return render(request, 'studentManagement.html', {"username": username, 'row_list': row_list})
+            cursor.close()

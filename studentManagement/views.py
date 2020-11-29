@@ -134,5 +134,3 @@ def studentSearch(request):
             return render(request, 'studentManagement.html', {"username": username, 'row_list': row_list})
             cursor.close()
 
-
-#dsffkagjgkajk

@@ -21,7 +21,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# YYQde xiugai
-# web更新
-# zhejiushi womenqiaodedaima
-# 这是我新修改的代码
+

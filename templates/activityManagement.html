@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}activityManagement{% endblock %}
+{% block content %}
+    <script src="{% static 'js/activityManagement.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/activityManagement.css' %}"/>
+    <p></p>
+    <div class="container-fluid">
+          <div class="row">
+                <div class="col-md-1 xj">
+                    活动管理》
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">添加</button>
+                </div>
+                <div class="col-md-8" style="height: 34px;">
+                    <form class="navbar-form navbar-left" action="{% url 'dailyManagement:activitySearch' %}" method="post">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="atype" placeholder="活动类型">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+          </div>
+    </div>
+{##################    添加活动遮罩层    ###################}
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">添加</h4>
+              </div>
+              <div class="modal-body">
+                 <form class="form-horizontal" action="{% url 'dailyManagement:activityAdd' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="aid" class="col-md-3 control-label">活动编号：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="aid" placeholder="aid">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="atype" class="col-md-3 control-label">活动类型：</label>
+                        <div class="col-md-4">
+                              <select name="atype" class="form-control">
+                                <option value="团建">团建</option>
+                                <option value="班会">班会</option>
+                                 <option value="其它">其它</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="atime" class="col-md-3 control-label">活动时间：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="atime" placeholder="atime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="members" class="col-md-3 control-label">成员姓名：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="members" placeholder="members">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6 text-center">
+                            <button type="submit" class="btn btn-default">添加</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 60px;">关闭</button>
+                        </div>
+                    </div>
+                 </form>
+              </div>
+            </div>
+        </div>
+    </div>
+{##################    更新活动遮罩层    ###################}
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">更新</h4>
+              </div>
+              <div class="modal-body">
+                 <form class="form-horizontal" action="{% url 'dailyManagement:activityUpdated' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="aid" class="col-md-3 control-label">活动编号：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="aid" placeholder="aid">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="atype" class="col-md-3 control-label">活动类型：</label>
+                        <div class="col-md-4">
+                              <select name="atype" class="form-control">
+                                <option value="团建">团建</option>
+                                <option value="班会">班会</option>
+                                 <option value="其它">其它</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="atime" class="col-md-3 control-label">活动时间：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="atime" placeholder="atime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="members" class="col-md-3 control-label">成员姓名：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="members" placeholder="members">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6 text-center">
+                            <button type="submit" class="btn btn-default">更新</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 60px;">关闭</button>
+                        </div>
+                    </div>
+                 </form>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive" style="margin-top: 10px;">
+        <table class="table table-bordered table-hover text-center">
+            <tr>
+                <td>活动编号</td>
+                <td>活动类型</td>
+                <td>活动时间</td>
+                <td>成员姓名</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% for row in row_list %}
+            <tr>
+                <td>{{ row.0 }}</td>
+                <td>{{ row.1 }}</td>
+                <td>{{ row.2 }}</td>
+                <td>{{ row.3 }}</td>
+                <td><a onclik="edit_activityManagment(this)" data-toggle="modal" data-target="#updateModal" data-whatever="@mdo"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td><a onclik="return delete_confirm()" href="{% url 'activityManagement:activityDelete' row.0 %}"> <span class="glyphicon glyphicon-trash"></span> </a> </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

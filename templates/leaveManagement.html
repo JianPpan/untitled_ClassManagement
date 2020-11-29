@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}leaveManagement{% endblock %}
+{% block content %}
+    <script src="{% static 'js/leaveManagement.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/leaveManagement.css' %}"/>
+    <p></p>
+    <div class="container-fluid">
+          <div class="row">
+                <div class="col-md-1 xj">
+                    请假管理》
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">添加</button>
+                </div>
+                <div class="col-md-8" style="height: 34px;">
+                    <form class="navbar-form navbar-left" action="{% url 'dailysManagement:leaveSearch' %}" method="post">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="ltype" placeholder="请假类型">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+          </div>
+    </div>
+{##################    添加请假遮罩层    ###################}
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">添加</h4>
+              </div>
+              <div class="modal-body">
+                 <form class="form-horizontal" action="{% url 'dailysManagement:leaveAdd' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="lid" class="col-md-3 control-label">请假编号：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="lid" placeholder="lid">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ltype" class="col-md-3 control-label">请假类型：</label>
+                        <div class="col-md-4">
+                              <select name="ltype" class="form-control">
+                                <option value="事假">事假</option>
+                                <option value="病假">病假</option>
+                                 <option value="其它">其它</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ltime" class="col-md-3 control-label">请假时间：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="ltime" placeholder="ltime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ldate" class=" col-md-3 control-label">请假天数：</label>
+                        <div class="col-md-4">
+                            <input type="text" id="ldate" class="form-control" name="ldate" placeholder="ldate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lplace" class="col-md-3 control-label">请假地点：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="lplace" placeholder="lplace">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6 text-center">
+                            <button type="submit" class="btn btn-default">添加</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 60px;">关闭</button>
+                        </div>
+                    </div>
+                 </form>
+              </div>
+            </div>
+        </div>
+    </div>
+{##################    更新活动遮罩层    ###################}
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">更新</h4>
+              </div>
+              <div class="modal-body">
+                 <form class="form-horizontal" action="{% url 'dailysManagement:leaveUpdated' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="lid" class="col-md-3 control-label">请假编号：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="lid" placeholder="lid">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ltype" class="col-md-3 control-label">请假类型：</label>
+                        <div class="col-md-4">
+                              <select name="ltype" class="form-control">
+                                <option value="事假">事假</option>
+                                <option value="病假">病假</option>
+                                 <option value="其它">其它</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ltime" class="col-md-3 control-label">请假时间：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="ltime" placeholder="ltime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ldate" class="col-md-3 control-label">请假天数：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="ldate" placeholder="ldate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lplace" class="col-md-3 control-label">请假地点：</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="lplace" placeholder="lplace">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6 text-center">
+                            <button type="submit" class="btn btn-default">更新</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 60px;">关闭</button>
+                        </div>
+                    </div>
+                 </form>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive" style="margin-top: 10px;">
+        <table class="table table-bordered table-hover text-center">
+            <tr>
+                <td>请假编号</td>
+                <td>请假类型</td>
+                <td>请假时间</td>
+                <td>请假天数</td>
+                <td>请假地点</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% for row in row_list %}
+            <tr>
+                <td>{{ row.0 }}</td>
+                <td>{{ row.1 }}</td>
+                <td>{{ row.2 }}</td>
+                <td>{{ row.3 }}</td>
+                <td>{{ row.4 }}</td>
+                <td><a onclik="edit_leaveManagment(this)" data-toggle="modal" data-target="#updateModal" data-whatever="@mdo"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td><a onclik="return delete_confirm()" href="{% url 'dailysManagement:leaveDelete' row.0 %}"> <span class="glyphicon glyphicon-trash"></span> </a> </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

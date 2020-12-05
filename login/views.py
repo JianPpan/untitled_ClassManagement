@@ -25,7 +25,7 @@ def login(request):
 
             cursor = conn()
 
-            sql = "select * from teacher where tname = '%s' and tpassword = '%s'" % (username, password)
+            sql = "select * from teacher where sname = '%s' and password = '%s'" % (username, password)
 
             try:
                 cursor.execute(sql)
@@ -40,5 +40,3 @@ def login(request):
         return render(request, 'login.html')
     else:
         return render(request, 'login.html')
-
-#keyiviews.zuo
